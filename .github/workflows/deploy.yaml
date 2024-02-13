@@ -15,13 +15,13 @@ jobs:
               uses: actions/checkout@v2
               with:
                   repository: anurag-kanwar-demo-org/anumax-prod-1
-                  path: /docs/prod-1
+                  path: ./docs/prod-1
 
             - name: Clone docs repository 2
               uses: actions/checkout@v2
               with:
                   repository: anurag-kanwar-demo-org/anumax-prod-2
-                  path: /docs/prod-2
+                  path: ./docs/prod-2
 
             - name: Set up Node.js
               uses: actions/setup-node@v2
