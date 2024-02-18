@@ -12,7 +12,7 @@ jobs:
               with:
                   command: cp
                   source: s3://docusaurus-proj/sitemap.xml
-                  destination: ./sitemaps/
+                  destination: ./
                   aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
                   aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
                   aws_region: ${{secrets.AWS_REGION}}
@@ -23,10 +23,10 @@ jobs:
               with:
                   command: cp
                   source: s3://docusaurus-proj/prod-1/sitemap.xml
-                  destination: ./sitemaps/
+                  destination: ./
                   aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
                   aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
                   aws_region: ${{secrets.AWS_REGION}}
                   flags: --recursive
             - name: list sitemaps
-              run: ls -lath ./sitemaps/
+              run: ls -lath ./
