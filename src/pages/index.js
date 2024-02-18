@@ -23,6 +23,20 @@ function HomepageHeader() {
             Docusaurus Tutorial - 5min ⏱️
           </Link>
         </div>
+        <div className={styles.buttons}>
+          <Link
+            className="button button--secondary button--lg"
+            to="/prod-1/index.html">
+            Docusaurus Tutorial - 5min ⏱️
+          </Link>
+        </div>
+        <div className={styles.buttons}>
+          <Link
+            className="button button--secondary button--lg"
+            to="/prod-2/index.html">
+            Docusaurus Tutorial - 5min ⏱️
+          </Link>
+        </div>
       </div>
     </header>
   );
