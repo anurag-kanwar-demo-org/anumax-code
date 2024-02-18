@@ -22,14 +22,15 @@ jobs:
             - name: Build app
               run: npm run build
             - name: Upload to S3
-              uses: jakejarvis/s3-sync-action@master
+              uses: keithweaver/aws-s3-github-action@v1.0.0
               with:
-                  args: --acl public-read
-              env:
-                  SOURCE_DIR: ./build
-                  AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  command: cp
+                  source: ./build/
+                  destination: s3://docusaurus-proj/
+                  aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  aws_region: ${{secrets.AWS_REGION}}
+                  flags: --recursive
     build-prod-1:
         needs: build-home
         runs-on: ubuntu-latest
@@ -58,12 +59,12 @@ jobs:
             - name: Build app
               run: npm run build
             - name: Upload to S3
-              uses: jakejarvis/s3-sync-action@master
+              uses: keithweaver/aws-s3-github-action@v1.0.0
               with:
-                  args: --acl public-read
-              env:
-                  SOURCE_DIR: ./build
-                  DEST_DIR: prod-1/
-                  AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  command: cp
+                  source: ./build/
+                  destination: s3://docusaurus-proj/prod-1/
+                  aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  aws_region: ${{secrets.AWS_REGION}}
+                  flags: --recursive
