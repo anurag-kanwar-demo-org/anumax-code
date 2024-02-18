@@ -21,12 +21,12 @@ jobs:
 
             - name: Build app
               run: npm run build
-            - name: Upload S3
-              uses: keithweaver/aws-s3-github-action@v1.0.0
+            - name: Upload to S3
+              uses: jakejarvis/s3-sync-action@master
               with:
-                  command: cp
-                  source: ./build
-                  destination: s3://docusaurus-proj/
-                  aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                  aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                  aws_region: ${{secrets.AWS_REGION}}
+                  args: --acl public-read
+              env:
+                  SOURCE_DIR: ./build
+                  AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
