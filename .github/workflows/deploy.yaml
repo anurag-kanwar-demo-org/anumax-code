@@ -4,27 +4,15 @@ on:
     workflow_dispatch:
 
 jobs:
-    build:
+    build-home:
         runs-on: ubuntu-latest
 
         steps:
             - name: Checkout docusaurus code
               uses: actions/checkout@v4
 
-            - name: Clone docs repository 1
-              uses: actions/checkout@v2
-              with:
-                  repository: anurag-kanwar-demo-org/anumax-prod-1
-                  path: ./docs/prod-1
-
-            - name: Clone docs repository 2
-              uses: actions/checkout@v2
-              with:
-                  repository: anurag-kanwar-demo-org/anumax-prod-2
-                  path: ./docs/prod-2
-
-            - name: Set up Node.js
-              uses: actions/setup-node@v2
+            - name: Node setup
+              uses: actions/setup-node@v4
               with:
                   node-version: "20"
 
@@ -33,13 +21,12 @@ jobs:
 
             - name: Build app
               run: npm run build
-
-            - name: Upload to S3
-              uses: jakejarvis/s3-sync-action@master
+            - name: Upload S3
+              uses: keithweaver/aws-s3-github-action@v1.0.0
               with:
-                  args: --acl public-read
-              env:
-                  SOURCE_DIR: ./build
-                  AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  command: cp
+                  source: ./build
+                  destination: s3://${{secrets.AWS_S3_BUCKET}}/
+                  aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  aws_region: ${{secrets.AWS_REGION}}
