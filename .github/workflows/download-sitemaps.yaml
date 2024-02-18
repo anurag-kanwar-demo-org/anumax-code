@@ -34,4 +34,4 @@ jobs:
             - name: list sitemaps
               run: ls -lath ./sitemaps
             - name: check sitemaps
-              uses: anurag-kanwar-demo-org/sitemaps-reorder
+              uses: anurag-kanwar-demo-org/sitemaps-reorder@main
