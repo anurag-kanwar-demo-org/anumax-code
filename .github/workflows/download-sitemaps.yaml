@@ -33,3 +33,5 @@ jobs:
                   flags: --recursive
             - name: list sitemaps
               run: ls -lath ./sitemaps
+            - name: check sitemaps
+              uses: anurag-kanwar-demo-org/sitemaps-reorder
