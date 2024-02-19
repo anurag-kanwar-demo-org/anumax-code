@@ -12,8 +12,15 @@ jobs:
               with:
                   repository: anurag-kanwar-demo-org/sitmap-combiner
                   path: ./
+            - name: Node setup
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
             - name: pwd
               run: pwd
+
+            - name: Install dependencies
+              run: npm install
 
             - name: ls
               run: ls -lath
@@ -43,4 +50,8 @@ jobs:
             - name: list sitemaps
               run: ls -lath
             - name: list sitemaps
-              run: ls -lath ./xml-files 
+              run: ls -lath ./xml-files
+            - name: run script
+              run: node index.js
+            - name: list asoj
+              run: ls -lath
