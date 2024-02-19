@@ -52,6 +52,6 @@ jobs:
             - name: list sitemaps
               run: ls -lath ./xml-files
             - name: run script
-              run: node index.js
+              run: node ./index.js
             - name: list asoj
               run: ls -lath
