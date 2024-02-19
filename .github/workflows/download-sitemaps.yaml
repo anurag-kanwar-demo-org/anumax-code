@@ -53,3 +53,20 @@ jobs:
               run: node ./index.js
             - name: list asoj
               run: ls -lath
+            - name: remove og sitemap
+              uses: keithweaver/aws-s3-github-action@v1.0.0
+              with:
+                  command: rm
+                  source: s3://docusaurus-proj/sitemap.xml
+                  aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  aws_region: ${{secrets.AWS_REGION}}
+            - name: copy combined sitemap
+              uses: keithweaver/aws-s3-github-action@v1.0.0
+              with:
+                  command: cp
+                  destination: s3://docusaurus-proj/prod-1/sitemap.xml
+                  source: ./output.xml
+                  aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  aws_region: ${{secrets.AWS_REGION}}
